@@ -6,4 +6,5 @@ class BookDAO(DAO):
         query = "SELECT * FROM books"
         self.cursor.execute(query)
         results = self.cursor.fetchall()
+        # Crée une liste d'objets Book à partir des résultats
         return [Book(**result) for result in results]

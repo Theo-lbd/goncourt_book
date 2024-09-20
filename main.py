@@ -159,6 +159,24 @@ def vote():
         print("Le grand gagnant a déjà été sélectionné.")
         display_books_vote(winning_book_global)
 
+def authenticate_jury():
+    """
+    Authentifie l'utilisateur comme jury en demandant un mot de passe.
+    
+    Returns:
+        bool: True si l'authentification réussit, False sinon.
+    """
+    password = "123456789"
+    input_password = input("Veuillez entrer le mot de passe du jury : ")
+
+    if input_password == password:
+        print("Authentification réussi.")
+        return True
+    else:
+        print("Mot de passe incorrect. Accès refusé.")
+        return False
+
+
 def jury_or_public():
     """
     Gère les choix entre le jury et le public, et appelle les fonctions appropriées en fonction de ces choix.
@@ -167,13 +185,14 @@ def jury_or_public():
 
     choice = input("Êtes-vous le jury(1) ou le public(2) ? ")
     if choice == '1':
-        action = input("Voulez-vous afficher la liste des livres(1) ou passer au vote(2) ? ")
-        if action == '1':
-            display_books()
-        elif action == '2':
-            vote()
-        else:
-            print("Choix invalide.")
+        if authenticate_jury():
+            action = input("Voulez-vous afficher la liste des livres(1) ou passer au vote(2) ? ")
+            if action == '1':
+                display_books()
+            elif action == '2':
+                vote()
+            else:
+                print("Choix invalide.")
     elif choice == '2':
         display_book_select()
     else:

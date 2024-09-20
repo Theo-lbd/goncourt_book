@@ -17,6 +17,42 @@ def display_books():
     else:
         print("Aucun livre trouvé.")
 
+def display_book_select():
+    print("Options pour le public :")
+    print("1 - Afficher tous les livres disponibles")
+    print("2 - Afficher les 8 livres sélectionnés")
+    print("3 - Afficher les 4 livres finalistes")
+    print("4 - Afficher le livre gagnant")
+    
+    action = input("Que voulez-vous faire ? (1/2/3/4) : ")
+    
+    if action == '1':
+        # Afficher tous les livres disponibles
+        display_books()
+    elif action == '2':
+        # Afficher les 8 livres sélectionnés
+        if selected_books_global:
+            print("Voici les 8 livres sélectionnés :")
+            display_books_vote(selected_books_global)
+        else:
+            print("Aucun livre n'a encore été sélectionné.")
+    elif action == '3':
+        # Afficher les 4 livres finalistes
+        if final_books_global:
+            print("Voici les 4 livres finalistes :")
+            display_books_vote(final_books_global)
+        else:
+            print("Les finalistes n'ont pas encore été sélectionnés.")
+    elif action == '4':
+        # Afficher le livre gagnant
+        if winning_book_global:
+            print("Voici le livre gagnant :")
+            display_books_vote(winning_book_global)
+        else:
+            print("Le livre gagnant n'a pas encore été sélectionné.")
+    else:
+        print("Choix invalide.")
+
 def select_books(books, max_books):
     """
     Permet au jury de sélectionner un nombre spécifique de livres parmi une liste donnée.
@@ -139,7 +175,7 @@ def jury_or_public():
         else:
             print("Choix invalide.")
     elif choice == '2':
-        display_books()
+        display_book_select()
     else:
         print("Choix invalide.")
     
